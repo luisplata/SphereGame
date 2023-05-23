@@ -3,6 +3,7 @@ using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
 public class InputFacade : MonoBehaviour, IInputFacade{
+    [SerializeField] private LevelLogic level;
     public Action<Vector2> onRelease, onFirstPosition;
     private Vector2 point;
     private bool isCliking;
@@ -18,7 +19,7 @@ public class InputFacade : MonoBehaviour, IInputFacade{
         isCliking = env.performed;
         if (env.started)
         {
-            firstPosition = CalculatePositionInWord();
+            firstPosition = level.PositionInLevel.position;
             secondPosition = firstPosition;
             onFirstPosition?.Invoke(firstPosition);
         }
@@ -26,7 +27,6 @@ public class InputFacade : MonoBehaviour, IInputFacade{
         {
             secondPosition = CalculatePositionInWord();
             Vector2 direction = GetDirection(firstPosition, secondPosition);
-            Debug.Log("Direction: " + direction);
             onRelease?.Invoke(direction);
             secondPosition = Vector2.zero;
             firstPosition = Vector2.zero;

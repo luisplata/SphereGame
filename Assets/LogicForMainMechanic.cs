@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class LogicForMainMechanic : MonoBehaviour
 {
+    public Action onStartShoot;
     [SerializeField] private PlayerCustom player;
     [SerializeField] private InputFacade input;
     private PlayerCustom playerInstantiate;
@@ -14,6 +16,7 @@ public class LogicForMainMechanic : MonoBehaviour
     {
         playerInstantiate = Instantiate(player);
         playerInstantiate?.Locate(vector);
+        onStartShoot?.Invoke();
     }
 
     private void ShootPlayer(Vector2 direction)
