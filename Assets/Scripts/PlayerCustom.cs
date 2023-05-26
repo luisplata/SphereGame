@@ -6,6 +6,7 @@ public class PlayerCustom : MonoBehaviour
     [SerializeField][Range(1,10)] private float speed = 1;
     private Vector2 velocity;
     private bool cantMove;
+    private ILogicOfLevel _levelLogic;
 
     internal void Shoot(Vector2 direction)
     {
@@ -21,6 +22,13 @@ public class PlayerCustom : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.TryGetComponent<CollisionCustom>(out var baseElement)){
+            Debug.Log($"Layer is {baseElement.GetElement().GetLayer()}");
+            if(baseElement.GetElement().GetLayer() != _levelLogic.GetCurrentLayer()){
+                return;
+            }
+        }
+
         // Get the collision normal
         Vector2 normal = collision.contacts[0].normal.normalized;
 
@@ -31,5 +39,10 @@ public class PlayerCustom : MonoBehaviour
     internal void Locate(Vector2 vector)
     {
         transform.position = vector;
+    }
+
+    public void Config(ILogicOfLevel levelLogic)
+    {
+        _levelLogic = levelLogic;
     }
 }
