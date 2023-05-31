@@ -4,7 +4,7 @@ public abstract class BaseElementInScene : MonoBehaviour
 {
     private int layer;
 
-    public void Config(ElementData element)
+    public virtual void Config(ElementData element)
     {
         transform.rotation = Quaternion.Euler(0, 0, element.Rotation);
         transform.position = new Vector2(element.PositionX, element.PositionY);

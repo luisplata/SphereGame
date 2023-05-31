@@ -31,19 +31,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         input.onFirstPosition = LocatePlayer;
 
         checkPoints = new List<CheckPoint>();
-        reding = new ReadingFile(mapToLoad);
-        foreach(var element in reding.GetElements()){
-            var elementInstantiate = Instantiate(factory.GetElementWithOutInstantate(element.Element));
-            if(elementInstantiate.GetType() == typeof(Bounce)){
-                var casting = (Bounce) elementInstantiate;
-                casting.Config(element, SuccessPoint, this);
-                checkPoints.Add(casting.CheckPoint);
-            }else if(elementInstantiate.GetType() == typeof(PointToStart)){
-                var casting = (PointToStart) elementInstantiate;
-                casting.Config(element);
-                positionInLevel = casting.transform;
-            }
-        }
+        GetElements(mapToLoad);
     }
 
     private void SuccessPoint()
@@ -73,5 +61,51 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     public int GetCurrentLayer()
     {
         return currentLayer;
+    }
+
+    public List<GameObject> GetElements(string data)
+    {
+        List<GameObject> listOfElements = new List<GameObject>();
+        reding = new ReadingFile(mapToLoad);
+        foreach(var element in reding.GetElements()){
+            var elementInstantiate = Instantiate(factory.GetElementWithOutInstantate(element.Element));
+            if(elementInstantiate.GetType() == typeof(Bounce)){
+                var casting = (Bounce) elementInstantiate;
+                casting.Config(element, SuccessPoint, this);
+                checkPoints.Add(casting.CheckPoint);
+                listOfElements.Add(casting.gameObject);
+            }else if(elementInstantiate.GetType() == typeof(PointToStart)){
+                var casting = (PointToStart) elementInstantiate;
+                casting.Config(element);
+                positionInLevel = casting.transform;
+                listOfElements.Add(casting.gameObject);
+            }else if(elementInstantiate.GetType() == typeof(MotionSensor)){
+                var casting = (MotionSensor) elementInstantiate;
+                casting.Config(element, this);
+                listOfElements.Add(casting.gameObject);
+            }else if(elementInstantiate.GetType() == typeof(TeleportBeging)){
+                var casting = (TeleportBeging) elementInstantiate;
+                casting.Config(element);
+                var redingg = new ReadingFile(element.Data.Replace('\'','\"'));
+                Debug.Log(redingg);
+                foreach(var elementt in redingg.GetElements()){
+                    var elementInstantiatee = Instantiate(factory.GetElementWithOutInstantate(elementt.Element));
+                    if(elementInstantiatee.GetType() == typeof(TeleportEnd)){
+                        var castingg = (TeleportEnd) elementInstantiatee;
+                        castingg.Config(elementt);
+                        casting.Config(element, castingg);
+                        break;
+                    }
+                }
+                listOfElements.Add(casting.gameObject);
+            }else if(elementInstantiate.GetType() == typeof(TeleportEnd)){
+                var casting = (TeleportEnd) elementInstantiate;
+                casting.Config(element);
+                listOfElements.Add(casting.gameObject);
+            }else{
+                elementInstantiate.Config(element);
+            }
+        }
+        return listOfElements;
     }
 }

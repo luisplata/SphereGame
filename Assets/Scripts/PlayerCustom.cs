@@ -8,7 +8,7 @@ public class PlayerCustom : MonoBehaviour
     private bool cantMove;
     private ILogicOfLevel _levelLogic;
 
-    internal void Shoot(Vector2 direction)
+    public void Shoot(Vector2 direction)
     {
         velocity = direction.normalized * speed;
         velocity = velocity *-1;
@@ -44,5 +44,10 @@ public class PlayerCustom : MonoBehaviour
     public void Config(ILogicOfLevel levelLogic)
     {
         _levelLogic = levelLogic;
+    }
+
+    public void Stop()
+    {
+        cantMove = false;
     }
 }
