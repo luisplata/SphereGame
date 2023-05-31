@@ -1,30 +1,23 @@
 using System.Collections;
 using UnityEngine;
 
-public class TeleportBeging : BaseElementInScene
+public class TeleportBeging : BaseElementInSceneWithCollider
 {
     private PlayerCustom player;
     [SerializeField]private float duration;
     private TeleportEnd _teleportEnd;
-
-    public void Config(ElementData element, TeleportEnd teleportEnd){
-        base.Config(element);
+    
+    public void Config(ElementData element, ILogicOfLevel level, TeleportEnd teleportEnd){
+        base.Config(element, level);
         _teleportEnd = teleportEnd;
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player")){
-            if(other.gameObject.TryGetComponent<PlayerCustom>(out var playerCustom)){
-                player = playerCustom;
-                playerCustom.Stop();
-                StartCoroutine(BlackHole());
-            }
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player")){
-            player = null;
+    protected override void OnCollisionEnter(GameObject other)
+    {
+        if(other.TryGetComponent<PlayerCustom>(out var playerCustom)){
+            player = playerCustom;
+            playerCustom.Stop();
+            StartCoroutine(BlackHole());
         }
     }
 

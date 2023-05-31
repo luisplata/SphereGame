@@ -1,27 +1,13 @@
 using System;
 using UnityEngine;
-public class MotionSensor : BaseElementInScene {
-
-    public CheckPoint CheckPoint => checkPoint;
-    [SerializeField] private CheckPoint checkPoint;
+public class MotionSensor : BaseElementInSceneWithCollider {
     [SerializeField] private MotionDoing doing;
-    private ILogicOfLevel _level;
-
-    public void Config(ElementData element, ILogicOfLevel level)
+    public override void Config(ElementData element, ILogicOfLevel level)
     {
-        base.Config(element);
-        ConfigElements(element.Data);
-        _level = level;
-        checkPoint.Config(GetLayer(), level);
-        checkPoint.onSuccessPoint = ()=>{
-            doing.Doing();
-        };
+        base.Config(element, level);
     }
-
-    private void ConfigElements(string data)
+    protected override void OnCollisionEnter(GameObject other)
     {
-        Debug.Log($"Data {data}");
-        var elements = _level.GetElements(data);
-        var movemnt = (MovingSomething)doing;
+        throw new NotImplementedException();
     }
 }
