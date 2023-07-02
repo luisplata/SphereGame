@@ -6,7 +6,7 @@ public class Booster : BaseElementInSceneWithCollider {
     [SerializeField] private BoosterCollider colliders;
     private bool canUse = true;
     
-    protected override void OnCollisionEnter(GameObject other){
+    protected override void OnCollisionEnterBase(GameObject other){
         StartCoroutine(MoveWithCurveCoroutine(other.GetComponent<PlayerCustom>(), colliders.GetMiddle(), colliders.GetTarget(),1));
     }
     

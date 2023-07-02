@@ -4,7 +4,7 @@ using UnityEngine;
 public class BounceWeak : BaseElementInSceneWithCollider{
     [SerializeField] private float seconsBeforeDestroy;
 
-    protected override void OnCollisionEnter(GameObject other)
+    protected override void OnCollisionEnterBase(GameObject other)
     {
         StartCoroutine(Destroy());
     }

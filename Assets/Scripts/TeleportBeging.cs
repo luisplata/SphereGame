@@ -12,7 +12,7 @@ public class TeleportBeging : BaseElementInSceneWithCollider
         _teleportEnd = teleportEnd;
     }
 
-    protected override void OnCollisionEnter(GameObject other)
+    protected override void OnCollisionEnterBase(GameObject other)
     {
         if(other.TryGetComponent<PlayerCustom>(out var playerCustom)){
             player = playerCustom;

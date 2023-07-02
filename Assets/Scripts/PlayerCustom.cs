@@ -24,9 +24,9 @@ public class PlayerCustom : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<CollisionCustom>(out var baseElement)){
             //Debug.Log($"Layer is {baseElement.GetElement().GetLayer()}");
-            // if(baseElement.GetElement().GetLayer() != _levelLogic.GetCurrentLayer()){
-            //     return;
-            // }
+            if(baseElement.GetElement().GetLayer() != _levelLogic.GetCurrentLayer()){
+                return;
+            }
         }
 
         // Get the collision normal

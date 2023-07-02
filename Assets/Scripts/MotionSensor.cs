@@ -6,7 +6,7 @@ public class MotionSensor : BaseElementInSceneWithCollider {
     {
         base.Config(element, level);
     }
-    protected override void OnCollisionEnter(GameObject other)
+    protected override void OnCollisionEnterBase(GameObject other)
     {
         throw new NotImplementedException();
     }

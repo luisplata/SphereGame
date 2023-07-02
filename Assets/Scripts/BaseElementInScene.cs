@@ -22,16 +22,3 @@ public abstract class BaseElementInScene : MonoBehaviour
         return layer;
     }
 }
-
-public abstract class BaseElementInSceneWithCollider : BaseElementInScene{
-    [SerializeField] private CollisionCustom collision;
-    public override void Config(ElementData element, ILogicOfLevel level)
-    {
-        base.Config(element, level);
-        
-        collision.onCollisionValid = (other)=>{
-            OnCollisionEnter(other);
-        };
-    }
-    protected abstract void OnCollisionEnter(GameObject other);
-}
