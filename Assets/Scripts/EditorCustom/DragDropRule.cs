@@ -1,7 +1,5 @@
-﻿using UnityEditor.U2D.Path;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DragDropRule : MonoBehaviour, IRule
