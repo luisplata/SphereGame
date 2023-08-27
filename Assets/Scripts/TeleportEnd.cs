@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using ServiceLocatorPath;
 using UnityEngine;
 
 public class TeleportEnd : BaseElementInScene
@@ -13,6 +14,7 @@ public class TeleportEnd : BaseElementInScene
         _player = player;
         _player.transform.position = transform.position;
         StartCoroutine(Expulse());
+        ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound(sfxName);
     }
     
     private IEnumerator Expulse()

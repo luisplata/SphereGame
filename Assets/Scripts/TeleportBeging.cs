@@ -1,4 +1,5 @@
 using System.Collections;
+using ServiceLocatorPath;
 using UnityEngine;
 
 public class TeleportBeging : BaseElementInSceneWithCollider
@@ -18,6 +19,7 @@ public class TeleportBeging : BaseElementInSceneWithCollider
             player = playerCustom;
             playerCustom.Stop();
             StartCoroutine(BlackHole());
+            ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound(sfxName);
         }
     }
 

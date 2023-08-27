@@ -1,14 +1,12 @@
 using UnityEngine;
 
 public abstract class BaseElementInSceneWithCollider : BaseElementInScene{
-    [SerializeField] private CollisionCustom collision;
+    [SerializeField] protected CollisionCustom collision;
     public override void Config(ElementData element, ILogicOfLevel level)
     {
         base.Config(element, level);
         
-        collision.onCollisionValid = (other)=>{
-            OnCollisionEnterBase(other);
-        };
+        collision.onCollisionValid = OnCollisionEnterBase;
     }
     protected abstract void OnCollisionEnterBase(GameObject other);
 }

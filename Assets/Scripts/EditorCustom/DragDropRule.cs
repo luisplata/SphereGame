@@ -26,7 +26,6 @@ public class DragDropRule : MonoBehaviour, IRule
         {
             _useCase = 1;
         });
-        Debug.Log("DragDropRule: Config");
         _main = Camera.main;
     }
     

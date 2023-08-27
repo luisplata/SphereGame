@@ -206,8 +206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db40b07b9799884fbc05197836472b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxName: Deslizador
   collision: {fileID: 8831068383319094760}
   colliders: {fileID: 8831068383319094760}
+  duration: 0.5
 --- !u!1 &8831068383715751524
 GameObject:
   m_ObjectHideFlags: 0

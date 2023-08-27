@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2e352cd0dd63b4b9f40103426f04ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
+  sfxName: Teleport-Out
+  duration: 0.2
   pointToExpulse: {fileID: 5054244325286910384}
 --- !u!1 &5054244324504031001
 GameObject:

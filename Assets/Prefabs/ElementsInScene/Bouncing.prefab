@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43402564f2f9c344a83ef9a76b6d4da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxName: Rebotar
   collision: {fileID: 3289242377631063135}
 --- !u!1 &4755155635402772089
 GameObject:

@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e7a3c9074dde9499c63b3112bc8a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxName: Teleport-In
   collision: {fileID: 887720103560070280}
-  duration: 1
+  duration: 0.1
 --- !u!1 &4708857577874042330
 GameObject:
   m_ObjectHideFlags: 0

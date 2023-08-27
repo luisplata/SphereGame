@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7cc076025b21e4cb4e9321dc3edceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxName: Rebotar
   collision: {fileID: 6731707380472586814}
   seconsBeforeDestroy: 1
 --- !u!1 &3207220135399881795

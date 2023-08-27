@@ -10,6 +10,10 @@ public class MainMenuRules : MonoBehaviour
     {
         game.onClick.AddListener(OnGameClick);
         editor.onClick.AddListener(OnEditorClick);
+        editor.gameObject.SetActive(false);
+#if UNITY_EDITOR || UNITY_STANDALONE
+        editor.gameObject.SetActive(true);
+#endif
     }
 
     private void OnEditorClick()

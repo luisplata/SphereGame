@@ -11,6 +11,8 @@ public class CreatorElementsRule : MonoBehaviour, IRule
     [SerializeField] private DragComponent dragComponentPrefab;
     [SerializeField] private FactoryOfElements factoryOfElements;
     private IRulesMediator _allRules;
+    private List<DragComponent> _dragComponents = new();
+    public List<DragComponent> DragComponents => _dragComponents;
 
     public void Config(IRulesMediator allRules)
     {
@@ -20,13 +22,12 @@ public class CreatorElementsRule : MonoBehaviour, IRule
         //fulled dropdown
         dropdown.ClearOptions();
         dropdown.AddOptions(elements);
-        Debug.Log("CreatorElementsRule: Config");
     }
 
     private void OnButtonToCreateClick()
     {
         var dragComponent = Instantiate(dragComponentPrefab, Vector3.zero, Quaternion.identity);
-        dragComponent.ConfigureDragComponent(factoryOfElements.GetElementWithOutInstantate(elements[dropdown.value]));
+        _dragComponents.Add(dragComponent.ConfigureDragComponent(factoryOfElements.GetElementWithOutInstantate(elements[dropdown.value]),elements[dropdown.value]));
     }
 
     private void OnDropdownChange(int arg0)

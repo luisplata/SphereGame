@@ -5,6 +5,7 @@ public class MenuRule : MonoBehaviour, IRule
 {
     [SerializeField] private Animator menuAnimation;
     [SerializeField] private Button buttonMenu;
+    [SerializeField] private Button buttonToCrateJson; 
     private bool _internalSwitcher;
     private IRulesMediator _rulesMediator;
 
@@ -12,12 +13,16 @@ public class MenuRule : MonoBehaviour, IRule
     {
         _rulesMediator = rulesMediator;
         buttonMenu.onClick.AddListener(OnMenuClick);
-        Debug.Log("MenuRule: Config");
+        buttonToCrateJson.onClick.AddListener(CreateJson);
+    }
+
+    private void CreateJson()
+    {
+        _rulesMediator.CreateJson();
     }
 
     private void OnMenuClick()
     {
-        Debug.Log("MenuRule: OnMenuClick");
         _internalSwitcher = !_internalSwitcher;
         menuAnimation.SetBool("IsOpen", _internalSwitcher);
     }

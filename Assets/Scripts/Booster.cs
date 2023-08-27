@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
+using ServiceLocatorPath;
 using UnityEngine;
 
 public class Booster : BaseElementInSceneWithCollider {
     [SerializeField] private BoosterCollider colliders;
+    [SerializeField] private float duration;
     private bool canUse = true;
     
     protected override void OnCollisionEnterBase(GameObject other){
-        StartCoroutine(MoveWithCurveCoroutine(other.GetComponent<PlayerCustom>(), colliders.GetMiddle(), colliders.GetTarget(),1));
+        StartCoroutine(MoveWithCurveCoroutine(other.GetComponent<PlayerCustom>(), colliders.GetMiddle(), colliders.GetTarget(),duration));
+        ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound(sfxName);
     }
     
     private IEnumerator MoveWithCurveCoroutine(PlayerCustom startPosition, GameObject middlePosition, GameObject targetPosition, float duration)

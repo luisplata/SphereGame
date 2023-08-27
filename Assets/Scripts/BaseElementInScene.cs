@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class BaseElementInScene : MonoBehaviour
 {
+    [SerializeField] protected string sfxName;
     private int layer;
     protected ILogicOfLevel _level;
 
