@@ -12,11 +12,8 @@ jobs:
         projectPath:
           - ./
         unityVersion:
-          - 2019.4.1f1
-          - 2020.2.1f1
+          - 2021.3.25f1
         targetPlatform:
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
-          - iOS # Build an iOS player.
           - Android # Build an Android player.
           - WebGL # WebGL.
     steps:
@@ -73,13 +70,9 @@ jobs:
         projectPath:
           - ./
         unityVersion:
-          - 2019.4.1f1
-          - 2020.2.1f1
+          - 2021.3.25f1
         targetPlatform:
-          - StandaloneWindows # Build a Windows 32-bit standalone.
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - tvOS # Build an AppleTV player.
-          - WSAPlayer # Build a UWP App.
 
     steps:
       - uses: actions/checkout@v3
@@ -120,8 +113,7 @@ jobs:
         projectPath:
           - ./
         unityVersion:
-          - 2019.4.1f1
-          - 2020.2.1f1
+          - 2021.3.25f1
         targetPlatform:
           - StandaloneOSX # Build a macOS standalone.
 
