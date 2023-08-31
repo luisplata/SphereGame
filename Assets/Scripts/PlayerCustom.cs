@@ -34,14 +34,6 @@ public class PlayerCustom : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void FixedUpdate()
-    {
-        if(!cantMove) return;
-        var position = transform.position;
-        lineRenderer.positionCount++;
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, position);
-    }
-
     private void Update() {
         if(!cantMove) return;
         transform.Translate(velocity * Time.deltaTime);
@@ -64,6 +56,10 @@ public class PlayerCustom : MonoBehaviour
         
         //Add more life to the player
         timeToLive.Enqueue(2f);
+        
+        var position = transform.position;
+        lineRenderer.positionCount++;
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, position);
     }
 
     internal void Locate(Vector2 vector)
