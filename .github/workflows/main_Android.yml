@@ -1,4 +1,4 @@
-name: Actions Web 😎
+name: Actions Android 😎
 on: [push]
 jobs:
   build:
@@ -25,11 +25,11 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: WebGL
+          targetPlatform: Android
       - uses: actions/upload-artifact@v2
         with:
-          name: build-WebGL
-          path: build/w/WebGL
+          name: build-Android
+          path: build/Android
       
   deploy:
     name: Butler Push to Itch
@@ -38,19 +38,19 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: build-WebGL
-          path: build/w/WebGL
+          name: build-Android
+          path: build/Android
       # Upload to Itch
       - name: Butler Push
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: html5
+          CHANNEL: android
           ITCH_GAME: sphere
           ITCH_USER: peryloth
-          PACKAGE: build/w/WebGL
+          PACKAGE: build/Android
       - name: Cleanup to avoid storage limit
         if: always()
         uses: geekyeggo/delete-artifact@v1
         with:
-            name: build-WebGL
+            name: build-Android
