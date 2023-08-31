@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     # This stops builds that are in-progress once a new commit comes in
     concurrency: 
-      group: unity-build
+      group: unity-build-win
       cancel-in-progress: true
     steps:
       # Checkout
