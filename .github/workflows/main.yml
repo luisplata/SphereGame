@@ -55,7 +55,7 @@ jobs:
         with:
             name: build-WebGL
   buildWindows:
-    name: Build Project
+    name: Build Project Windows
     runs-on: ubuntu-latest
     # This stops builds that are in-progress once a new commit comes in
     concurrency:
@@ -73,7 +73,7 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build project
+      - name: Build project Windows
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -109,7 +109,7 @@ jobs:
           name: build-Windows
           
   buildAndroid:
-    name: Build Project
+    name: Build Project Android
     runs-on: ubuntu-latest
     # This stops builds that are in-progress once a new commit comes in
     concurrency:
@@ -127,7 +127,7 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build project
+      - name: Build project Android
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
