@@ -60,11 +60,11 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         yield return new WaitForSeconds(timeToWaitBeforeStartTransparent);
         //change alpha  1 to 0 in timeToWait
         while(alpha > 0){
-            Debug.Log("Alpha: " + alpha);
+            //Debug.Log("Alpha: " + alpha);
             alpha -= Time.deltaTime / timeToWait;
             color.a = alpha;
             material.color = color;
-            Debug.Log("Alpha: " + alpha);
+            //Debug.Log("Alpha: " + alpha);
             yield return null;
         }
     }

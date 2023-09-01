@@ -66,7 +66,7 @@ public class PlayerCustom : MonoBehaviour
     protected void AddPointInLine(Vector3 position)
     {
         lineRenderer.positionCount++;
-        lineRenderer.SetPosition(lineRenderer.positionCount - 2, position);
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, position);
     }
 
     internal void Locate(Vector2 vector)
