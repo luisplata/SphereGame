@@ -46,6 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e8abd4cad575b4a92a4d79b598ed3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxName: 
+  spriteRenderer: {fileID: 5601130575923089397}
+  spriteOn: {fileID: 21300000, guid: 8de62af53bb776940a69939713acba3c, type: 3}
+  spriteOff: {fileID: 21300000, guid: 8de62af53bb776940a69939713acba3c, type: 3}
   end: {fileID: 3785626457003963034}
   originalColor: {fileID: 5601130575923089397}
 --- !u!1 &3370713286653714886

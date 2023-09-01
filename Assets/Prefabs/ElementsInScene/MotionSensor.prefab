@@ -47,7 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69524c9dc94edb40afaa2547be5e596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkPoint: {fileID: 7621954332403692904}
+  sfxName: 
+  collision: {fileID: 0}
+  spriteRenderer: {fileID: 7323209655993918709}
+  spriteOn: {fileID: 21300000, guid: b4be1acc70888d8408c10d5aa3df282e, type: 3}
+  spriteOff: {fileID: 21300000, guid: cea33fbdf54631449b42f90cd4e96fba, type: 3}
   doing: {fileID: 634301520006244884}
 --- !u!114 &634301520006244884
 MonoBehaviour:
@@ -220,14 +224,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1419597782031458637, guid: 4ca107cf2a1f8b748bca6f641b1a8260, type: 3}
   m_PrefabInstance: {fileID: 1291621491074097970}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7621954332403692904 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -564535509275077030, guid: 4ca107cf2a1f8b748bca6f641b1a8260, type: 3}
-  m_PrefabInstance: {fileID: 1291621491074097970}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cdcc9bb641304f47b9f449de8b7f408, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

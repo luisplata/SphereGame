@@ -7,6 +7,8 @@ public abstract class BaseElementInSceneWithCollider : BaseElementInScene{
         base.Config(element, level);
         
         collision.onCollisionValid = OnCollisionEnterBase;
+        
+        spriteRenderer.sprite = spriteOn;
     }
     protected abstract void OnCollisionEnterBase(GameObject other);
 }

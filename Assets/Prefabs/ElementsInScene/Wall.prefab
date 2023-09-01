@@ -139,3 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxName: 
+  spriteRenderer: {fileID: 7419520687931631131}
+  spriteOn: {fileID: 21300000, guid: 364ee6b6704bfb44e86a0ca0862de3bf, type: 3}
+  spriteOff: {fileID: 21300000, guid: 364ee6b6704bfb44e86a0ca0862de3bf, type: 3}

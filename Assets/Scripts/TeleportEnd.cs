@@ -7,7 +7,7 @@ public class TeleportEnd : BaseElementInScene
 {
     private PlayerCustom _player;
     [SerializeField] private float duration;
-    [SerializeField] private GameObject pointToExpulse;
+    [SerializeField] protected GameObject pointToExpulse;
 
     internal void Teleport(PlayerCustom player)
     {

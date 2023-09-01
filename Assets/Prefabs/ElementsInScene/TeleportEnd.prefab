@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxName: Teleport-Out
+  spriteRenderer: {fileID: 5054244324504031003}
+  spriteOn: {fileID: 21300000, guid: f72018deb12ca334d8f01cda65ca102f, type: 3}
+  spriteOff: {fileID: 21300000, guid: ced3f3eb6a40fc84fb6019e34cede987, type: 3}
   duration: 0.2
   pointToExpulse: {fileID: 5054244325286910384}
 --- !u!1 &5054244324504031001

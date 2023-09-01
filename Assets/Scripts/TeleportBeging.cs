@@ -41,6 +41,8 @@ public class TeleportBeging : BaseElementInSceneWithCollider
 
             yield return null; // Wait for the next frame
         }
+        
+        DoSomethingAfterTeleport();
 
         // Ensure the object reaches the exact target position
         player.transform.position = targetPosition;
@@ -49,4 +51,6 @@ public class TeleportBeging : BaseElementInSceneWithCollider
         _teleportEnd.Teleport(player);
         player = null;
     }
+
+    protected virtual void DoSomethingAfterTeleport(){}
 }

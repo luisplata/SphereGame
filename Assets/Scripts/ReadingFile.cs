@@ -25,6 +25,7 @@ public class ElementData
     public int Layer;
     public int Rotation;
     public string Data;
+    public int LayerDestiny;
 }
 
 [System.Serializable]

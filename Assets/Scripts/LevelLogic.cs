@@ -20,13 +20,15 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     private ReadingFile reding;
     [SerializeField]private int currentLayer;
     [SerializeField] private float timeToWaitBeforeStartTransparent;
+    private List<BaseElementInScene> _listOfElementsWithLayer;
 
     private void Start() {
         
         listOfElements = new List<BaseElementInScene>();
-        var list = GetElements(mapToLoad);
-        CreateLinesWithDataFromMap(list);
+        _listOfElementsWithLayer = GetElements(mapToLoad);
+        CreateLinesWithDataFromMap(_listOfElementsWithLayer);
         ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound("bg", true);
+        ChangeLayer(currentLayer);
     }
 
     private void CreateLinesWithDataFromMap(List<BaseElementInScene> list)
@@ -87,6 +89,15 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         return currentLayer;
     }
 
+    public void ChangeLayer(int layerDestiny)
+    {
+        currentLayer = layerDestiny;
+        foreach(var element in _listOfElementsWithLayer)
+        {
+            element.ChangeLayer(element.GetLayer() == currentLayer);
+        }
+    }
+
     public List<BaseElementInScene> GetElements(string data)
     {
         input.onRelease = ShootPlayer;
@@ -95,7 +106,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
             Destroy(eleme.gameObject);
         }
         listOfElements = new List<BaseElementInScene>();
-        reding = new ReadingFile(mapToLoad);
+        reding = new ReadingFile(data);
         foreach(var element in reding.GetElements()){
             var elementInstantiate = Instantiate(factory.GetElementWithOutInstantate(element.Element));
             elementInstantiate.Config(element, this);
@@ -116,6 +127,22 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
                 casting.onWin = OnWin;
             }else if(elementInstantiate.GetType() == typeof(MotionSensor)){
                 var casting = (MotionSensor) elementInstantiate;
+            }else if(elementInstantiate.GetType() == typeof(TeleportLayerBeging)){
+                Debug.Log("TeleportLayerBeging");
+                var casting = (TeleportLayerBeging) elementInstantiate;
+                var redingg = new ReadingFile(element.Data.Replace('\'','\"'));
+                foreach(var elementt in redingg.GetElements()){
+                    var elementInstantiatee = Instantiate(factory.GetElementWithOutInstantate(elementt.Element));
+                    if(elementInstantiatee.GetType() == typeof(TeleportLayerEnd)){
+                        var castingg = (TeleportLayerEnd) elementInstantiatee;
+                        Debug.Log("TeleportLayerEnd");
+                        Debug.Log("LayerDestiny: " + elementt.LayerDestiny);
+                        castingg.Config(elementt, this, elementt.LayerDestiny);
+                        casting.Config(element, this, castingg, elementt.LayerDestiny);
+                        listOfElements.Add(elementInstantiatee);
+                        break;
+                    }
+                }
             }else if(elementInstantiate.GetType() == typeof(TeleportBeging)){
                 var casting = (TeleportBeging) elementInstantiate;
                 var redingg = new ReadingFile(element.Data.Replace('\'','\"'));
@@ -129,8 +156,6 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
                         break;
                     }
                 }
-            }else if(elementInstantiate.GetType() == typeof(TeleportEnd)){
-                var casting = (TeleportEnd) elementInstantiate;
             }
         }
         return listOfElements;

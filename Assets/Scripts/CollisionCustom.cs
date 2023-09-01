@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class CollisionCustom : MonoBehaviour
 {
     public Action<GameObject> onCollisionValid;

@@ -3,6 +3,8 @@ using UnityEngine;
 public abstract class BaseElementInScene : MonoBehaviour
 {
     [SerializeField] protected string sfxName;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected Sprite spriteOn, spriteOff;
     private int layer;
     protected ILogicOfLevel _level;
 
@@ -21,5 +23,10 @@ public abstract class BaseElementInScene : MonoBehaviour
     public int GetLayer()
     {
         return layer;
+    }
+
+    public void ChangeLayer(bool isMyLayer)
+    {
+        
     }
 }

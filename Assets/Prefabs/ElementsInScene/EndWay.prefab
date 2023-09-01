@@ -45,7 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd16aa87803436b4699ebea8df52ee54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxName: 
   collision: {fileID: 2411850223222260720}
+  spriteRenderer: {fileID: 8374113638680249262}
+  spriteOn: {fileID: 21300000, guid: 267332eaafd49d242833986ff6e24e11, type: 3}
+  spriteOff: {fileID: 21300000, guid: 267332eaafd49d242833986ff6e24e11, type: 3}
 --- !u!1 &6725937683711664212
 GameObject:
   m_ObjectHideFlags: 0

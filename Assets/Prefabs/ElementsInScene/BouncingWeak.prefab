@@ -47,6 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxName: Rebotar
   collision: {fileID: 6731707380472586814}
+  spriteRenderer: {fileID: 3207220135399881792}
+  spriteOn: {fileID: 21300000, guid: 7709f36f9cd8ae4419d9460dc08c6944, type: 3}
+  spriteOff: {fileID: 21300000, guid: 7709f36f9cd8ae4419d9460dc08c6944, type: 3}
   seconsBeforeDestroy: 1
 --- !u!1 &3207220135399881795
 GameObject:

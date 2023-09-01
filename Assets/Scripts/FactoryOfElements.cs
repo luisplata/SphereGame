@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FactoryOfElements : MonoBehaviour, IFactory
 {
-    [SerializeField] BaseElementInScene bounce, bounceWaek, pointToStart, motionSensor, wall, wallSmall, teleportBeging, teleportEnd, boosterLeft, boosterRight, booster;
+    [SerializeField] BaseElementInScene bounce, bounceWaek, pointToStart, motionSensor, wall, wallSmall, teleportBeging, teleportEnd, boosterLeft, boosterRight, booster, teleportLayerBeging, teleportLayerEnd;
     public BaseElementInScene GetElementWithOutInstantate(string name)
     {
         switch(name){
@@ -28,6 +28,10 @@ public class FactoryOfElements : MonoBehaviour, IFactory
                 return bounceWaek;
             case "Booster":
                 return booster;
+            case "TeleportLayerBeging":
+                return teleportLayerBeging;
+            case "TeleportLayerEnd":
+                return teleportLayerEnd;
             default:
                 throw new System.Exception("Element not found");
         }
