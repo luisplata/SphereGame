@@ -21,6 +21,8 @@ public class PlayerCustom : MonoBehaviour
         lineRenderer.positionCount = 0;
         timeToLive.Enqueue(5f);
         StartCoroutine(DestroyAfterTime());
+        AddPointInLine(transform.position);
+        AddPointInLine(transform.position);
     }
 
     private IEnumerator DestroyAfterTime()
@@ -37,6 +39,7 @@ public class PlayerCustom : MonoBehaviour
     private void Update() {
         if(!cantMove) return;
         transform.Translate(velocity * Time.deltaTime);
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, transform.position);
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,9 +60,13 @@ public class PlayerCustom : MonoBehaviour
         //Add more life to the player
         timeToLive.Enqueue(2f);
         
-        var position = transform.position;
+        AddPointInLine(transform.position);
+    }
+
+    protected void AddPointInLine(Vector3 position)
+    {
         lineRenderer.positionCount++;
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, position);
+        lineRenderer.SetPosition(lineRenderer.positionCount - 2, position);
     }
 
     internal void Locate(Vector2 vector)
