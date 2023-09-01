@@ -49,8 +49,3 @@ jobs:
           ITCH_GAME: sphere
           ITCH_USER: peryloth
           PACKAGE: build/Android
-      - name: Cleanup to avoid storage limit
-        if: always()
-        uses: geekyeggo/delete-artifact@v1
-        with:
-            name: build-Android
