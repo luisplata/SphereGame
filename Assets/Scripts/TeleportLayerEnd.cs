@@ -9,8 +9,6 @@ public class TeleportLayerEnd : TeleportEnd
     public void Config(ElementData element, ILogicOfLevel level, int layerDestiny)
     {
         base.Config(element, level);
-        /*_spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.enabled = false;*/
-        _layerDestiny = layerDestiny;
+        layer = layerDestiny;
     }
 }

@@ -5,7 +5,12 @@ using UnityEngine;
 public class CollisionCustom : MonoBehaviour
 {
     public Action<GameObject> onCollisionValid;
-    [SerializeField] private BaseElementInScene element;
+    private BaseElementInScene element;
+    
+    public void Config(BaseElementInScene element)
+    {
+        this.element = element;
+    }
 
     internal BaseElementInScene GetElement()
     {
