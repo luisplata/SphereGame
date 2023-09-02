@@ -51,6 +51,7 @@ MonoBehaviour:
   spriteOff: {fileID: 21300000, guid: c50b5b8ddca132b47b36fa7d631568f2, type: 3}
   collision: {fileID: 6977706250232876184}
   duration: 0.1
+  _layerDestiny: 0
 --- !u!1 &6977706250232876186
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,4 +166,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb8f7e93f83be642a730a744eca1358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  element: {fileID: 6977706248634656018}

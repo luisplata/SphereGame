@@ -49,18 +49,21 @@ public class PlayerCustom : MonoBehaviour
             if(baseElement.GetElement().GetLayer() != _levelLogic.GetCurrentLayer()){
                 return;
             }
+            
+            // Get the collision normal
+            Vector2 normal = collision.contacts[0].normal.normalized;
+            Debug.Log($">>>baseElement: {baseElement.GetElement().GetElement()} - {baseElement.GetElement().GetLayer()} - IsTrigger {baseElement.IsTrigger()}");
+            if (!baseElement.IsTrigger())
+            {
+                // Calculate the new velocity after the collision
+                velocity = Vector2.Reflect(velocity, normal);   
+            }
+        
+            //Add more life to the player
+            timeToLive.Enqueue(2f);
+        
+            AddPointInLine(transform.position);
         }
-
-        // Get the collision normal
-        Vector2 normal = collision.contacts[0].normal.normalized;
-
-        // Calculate the new velocity after the collision
-        velocity = Vector2.Reflect(velocity, normal);
-        
-        //Add more life to the player
-        timeToLive.Enqueue(2f);
-        
-        AddPointInLine(transform.position);
     }
 
     protected void AddPointInLine(Vector3 position)

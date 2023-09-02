@@ -6,10 +6,12 @@ public class CollisionCustom : MonoBehaviour
 {
     public Action<GameObject> onCollisionValid;
     private BaseElementInScene element;
-    
-    public void Config(BaseElementInScene element)
+    private bool _isTrigger;
+
+    public void Config(BaseElementInScene element, bool isTrigger)
     {
         this.element = element;
+        _isTrigger = isTrigger;
     }
 
     internal BaseElementInScene GetElement()
@@ -21,5 +23,10 @@ public class CollisionCustom : MonoBehaviour
         if(other.gameObject.CompareTag("Player") && element.IsValidLayer()){
             onCollisionValid?.Invoke(other.gameObject);
         }
+    }
+    
+    public bool IsTrigger()
+    {
+        return _isTrigger;
     }
 }

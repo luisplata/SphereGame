@@ -8,7 +8,7 @@ public class MovingSomething : MotionDoing
     private bool isDoing;
     public override void Doing()
     {
-        if(isDoing) return;
+        if(!wasConfigured) return;
         StartCoroutine(MoveTransformCoroutine());
         isDoing = true;
     }
@@ -17,6 +17,7 @@ public class MovingSomething : MotionDoing
         this.something = something;
         initial = initialTranform;
         final = finalTranform;
+        wasConfigured = true;
     }
 
     private IEnumerator MoveTransformCoroutine()

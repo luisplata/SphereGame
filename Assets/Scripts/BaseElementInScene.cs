@@ -6,8 +6,9 @@ public abstract class BaseElementInScene : MonoBehaviour
     [SerializeField] protected string sfxName;
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected Sprite spriteOn, spriteOff;
-    protected int layer;
+    [SerializeField] protected int layer;
     protected ILogicOfLevel _level;
+    private ElementData _element;
 
     public virtual void Config(ElementData element,ILogicOfLevel level)
     {
@@ -15,6 +16,12 @@ public abstract class BaseElementInScene : MonoBehaviour
         transform.position = new Vector2(element.PositionX, element.PositionY);
         layer = element.Layer;
         _level = level;
+        _element = element;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     public bool IsValidLayer(){
@@ -40,4 +47,10 @@ public abstract class BaseElementInScene : MonoBehaviour
             spriteRenderer.color = color;
         }
     }
+
+    public string GetElement()
+    {
+        return _element.Element;
+    }
+
 }

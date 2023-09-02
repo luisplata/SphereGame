@@ -8,7 +8,6 @@ public class BounceWeak : BaseElementInSceneWithCollider{
     protected override void OnCollisionEnterBase(GameObject other)
     {
         StartCoroutine(Destroy());
-        ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound(sfxName);
     }
 
     private IEnumerator Destroy(){

@@ -62,4 +62,9 @@ public class PointToStart : BaseElementInScene
         end.gameObject.SetActive(false);
         originalColor.color = Color.white;
     }
+
+    public PointToEnd GetEndPoint()
+    {
+        return end;
+    }
 }

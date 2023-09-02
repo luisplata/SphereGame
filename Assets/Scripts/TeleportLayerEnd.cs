@@ -1,10 +1,9 @@
-﻿using Unity.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TeleportLayerEnd : TeleportEnd
 {
     private SpriteRenderer _spriteRenderer;
-    [SerializeField][ReadOnly] private int _layerDestiny;
+    [SerializeField] private int _layerDestiny;
     
     public void Config(ElementData element, ILogicOfLevel level, int layerDestiny)
     {

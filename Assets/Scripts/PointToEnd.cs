@@ -8,4 +8,9 @@ public class PointToEnd : BaseElementInSceneWithCollider {
     {
         onWin?.Invoke();
     }
+
+    public void SetLayer(int currentLayer)
+    {
+        layer = currentLayer;
+    }
 }

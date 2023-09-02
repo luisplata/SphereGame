@@ -6,7 +6,7 @@ public class FactoryOfElements : MonoBehaviour, IFactory
     public BaseElementInScene GetElementWithOutInstantate(string name)
     {
         switch(name){
-            case "RebotadorDebil":
+            case "Bounce":
                 return bounce;
             case "PointToStart":
                 return pointToStart;

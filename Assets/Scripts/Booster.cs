@@ -10,7 +10,6 @@ public class Booster : BaseElementInSceneWithCollider {
     
     protected override void OnCollisionEnterBase(GameObject other){
         StartCoroutine(MoveWithCurveCoroutine(other.GetComponent<PlayerCustom>(), colliders.GetMiddle(), colliders.GetTarget(),duration));
-        ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound(sfxName);
     }
     
     private IEnumerator MoveWithCurveCoroutine(PlayerCustom startPosition, GameObject middlePosition, GameObject targetPosition, float duration)

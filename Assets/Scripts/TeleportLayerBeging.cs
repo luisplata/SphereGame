@@ -1,10 +1,9 @@
-﻿using Unity.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TeleportLayerBeging : TeleportBeging
 {
-    [SerializeField][ReadOnly] private int _layerDestiny;
-    public void Config(ElementData element, ILogicOfLevel level, TeleportEnd teleportEnd, int layerDestiny)
+    [SerializeField] private int _layerDestiny;
+    public void Config(ElementData element, ILogicOfLevel level, TeleportLayerEnd teleportEnd, int layerDestiny)
     {
         base.Config(element, level, teleportEnd);
         _layerDestiny = layerDestiny;

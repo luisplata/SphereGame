@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ServiceLocatorPath;
@@ -26,26 +27,29 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         
         listOfElements = new List<BaseElementInScene>();
         _listOfElementsWithLayer = GetElements(mapToLoad);
-        CreateLinesWithDataFromMap(_listOfElementsWithLayer);
         ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound("bg", true);
         ChangeLayer(currentLayer);
+        CreateLinesWithDataFromMap(_listOfElementsWithLayer);
     }
 
     private void CreateLinesWithDataFromMap(List<BaseElementInScene> list)
     {
         lineRenderer.positionCount = list.Count;
         var lastPosition = Vector3.zero;
-        for(int i = 0; i < list.Count; i++){
-            if (list[i].GetType() == typeof(Wall))
+        var index = 0;
+        foreach (var baseElementInScene in list)
+        {
+            if (baseElementInScene.GetType() == typeof(Wall))
             {
                 lineRenderer.positionCount--;
                 continue;
             }
-            if(list[i].GetType() == typeof(PointToStart)){
-                lastPosition = list[i].transform.position;
+            if(baseElementInScene.GetType() == typeof(PointToStart)){
+                lastPosition = baseElementInScene.GetPosition();
                 lineRenderer.positionCount++;
             }
-            lineRenderer.SetPosition(i, list[i].transform.position);
+            lineRenderer.SetPosition(index, baseElementInScene.GetPosition());
+            index++;
         }
         lineRenderer.SetPosition(lineRenderer.positionCount - 1, lastPosition);
         StartCoroutine(StartTransparentToMaterialIntoLineRender(timeToWaitLineInScreen));
@@ -95,6 +99,10 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         foreach(var element in _listOfElementsWithLayer)
         {
             element.ChangeLayer(element.GetLayer() == currentLayer);
+            if(element is PointToStart pointToStart)
+            {
+                pointToStart.GetEndPoint().SetLayer(currentLayer);
+            }
         }
     }
 
@@ -127,16 +135,23 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
                 casting.onWin = OnWin;
             }else if(elementInstantiate.GetType() == typeof(MotionSensor)){
                 var casting = (MotionSensor) elementInstantiate;
+                var redingg = new ReadingFile(element.Data.Replace('\'','\"'));
+                var elementsFromSensor = redingg.GetElements();
+                var newList = new List<BaseElementInScene>();
+                foreach(var elementt in elementsFromSensor){
+                    var elementInstantiatee = Instantiate(factory.GetElementWithOutInstantate(elementt.Element));
+                    elementInstantiatee.Config(elementt, this);
+                    listOfElements.Add(elementInstantiatee);
+                    newList.Add(elementInstantiatee);
+                }
+                casting.Config(element, this, newList);
             }else if(elementInstantiate.GetType() == typeof(TeleportLayerBeging)){
-                Debug.Log("TeleportLayerBeging");
                 var casting = (TeleportLayerBeging) elementInstantiate;
                 var redingg = new ReadingFile(element.Data.Replace('\'','\"'));
                 foreach(var elementt in redingg.GetElements()){
                     var elementInstantiatee = Instantiate(factory.GetElementWithOutInstantate(elementt.Element));
                     if(elementInstantiatee.GetType() == typeof(TeleportLayerEnd)){
                         var castingg = (TeleportLayerEnd) elementInstantiatee;
-                        Debug.Log("TeleportLayerEnd");
-                        Debug.Log("LayerDestiny: " + elementt.LayerDestiny);
                         castingg.Config(elementt, this, elementt.LayerDestiny);
                         casting.Config(element, this, castingg, elementt.LayerDestiny);
                         listOfElements.Add(elementInstantiatee);

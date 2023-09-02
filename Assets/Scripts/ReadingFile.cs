@@ -10,7 +10,7 @@ public class ReadingFile
         elementDataList = JsonUtility.FromJson<ElementDataList>(mapToLoad);
     }
 
-    internal IEnumerable<ElementData> GetElements()
+    internal ElementData[] GetElements()
     {
         return elementDataList.elements;
     }

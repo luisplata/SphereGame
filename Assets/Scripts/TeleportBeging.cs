@@ -19,7 +19,6 @@ public class TeleportBeging : BaseElementInSceneWithCollider
             player = playerCustom;
             playerCustom.Stop();
             StartCoroutine(BlackHole());
-            ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound(sfxName);
         }
     }
 
