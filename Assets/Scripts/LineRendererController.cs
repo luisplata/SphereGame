@@ -24,4 +24,12 @@ public class LineRendererController : MonoBehaviour
     {
         return initialPos + (vel * 1f);
     }
+
+    public void ResetLine()
+    {
+        lineRendererToPull.SetPosition(0, Vector2.zero);
+        lineRendererToPull.SetPosition(1, Vector2.zero);
+        lineRendererToGo.SetPosition(0, Vector2.zero);
+        lineRendererToGo.SetPosition(1, Vector2.zero);
+    }
 }

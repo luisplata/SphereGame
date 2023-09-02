@@ -1,3 +1,3 @@
-public class Wall : BaseElementInScene{
+public class Wall : BaseElementInSceneWithCollider{
     
 }

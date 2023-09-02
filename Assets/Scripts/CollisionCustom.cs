@@ -12,6 +12,7 @@ public class CollisionCustom : MonoBehaviour
     {
         this.element = element;
         _isTrigger = isTrigger;
+        GetComponent<Collider2D>().isTrigger = isTrigger;
     }
 
     internal BaseElementInScene GetElement()
@@ -20,7 +21,13 @@ public class CollisionCustom : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player") && element.IsValidLayer()){
+        if(other.gameObject.CompareTag("Player") && element.IsValidLayer() && !_isTrigger){
+            onCollisionValid?.Invoke(other.gameObject);
+        }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("Player") && element.IsValidLayer() && _isTrigger){
             onCollisionValid?.Invoke(other.gameObject);
         }
     }

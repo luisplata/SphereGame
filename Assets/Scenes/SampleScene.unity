@@ -2250,6 +2250,7 @@ MonoBehaviour:
   input: {fileID: 1274528242}
   lineRenderer: {fileID: 1045356306}
   timeToWaitLineInScreen: 1
+  lineRendererController: {fileID: 1549134653}
   currentLayer: 0
   timeToWaitBeforeStartTransparent: 2
 --- !u!4 &1045356304

@@ -14,6 +14,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     [SerializeField] private InputFacade input;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float timeToWaitLineInScreen;
+    [SerializeField] private LineRendererController lineRendererController;
     private PlayerCustom playerInstantiate;
     private Transform positionInLevel;
     private GameObject[] positionsToCheckPoints;
@@ -86,6 +87,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     private void ShootPlayer(Vector2 direction)
     {
         playerInstantiate?.Shoot(direction);
+        lineRendererController?.ResetLine();
     }
 
     public int GetCurrentLayer()
