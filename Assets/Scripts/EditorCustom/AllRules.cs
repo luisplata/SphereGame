@@ -45,6 +45,7 @@ public class AllRules : MonoBehaviour, IRulesMediator
     public void CreateJson()
     {
         var result = GetRule<IFileManager>().CreateJson(GetRule<CreatorElementsRule>().DragComponents);
+        ServiceLocator.Instance.GetService<IFileManager>().SaveMap(result);
         //Send to server or however you want
     }
 

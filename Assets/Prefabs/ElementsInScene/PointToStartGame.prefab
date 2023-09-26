@@ -50,8 +50,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5601130575923089397}
   spriteOn: {fileID: 21300000, guid: 8de62af53bb776940a69939713acba3c, type: 3}
   spriteOff: {fileID: 21300000, guid: 8de62af53bb776940a69939713acba3c, type: 3}
-  end: {fileID: 3785626457003963034}
+  layer: 0
   originalColor: {fileID: 5601130575923089397}
+  pointToEnd: {fileID: 3785626457003963034}
 --- !u!1 &3370713286653714886
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +147,10 @@ PrefabInstance:
     - target: {fileID: 1942508665097444020, guid: 4c252bc78f9aea245b5103f27d4f81b6, type: 3}
       propertyPath: m_Name
       value: EndWay
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942508665097444020, guid: 4c252bc78f9aea245b5103f27d4f81b6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2405693463031667636, guid: 4c252bc78f9aea245b5103f27d4f81b6, type: 3}
       propertyPath: m_RootOrder

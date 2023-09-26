@@ -1,32 +1,30 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class PointToStart : BaseElementInScene
 {
-    public Action onWin;
-    [SerializeField] private PointToEnd end;
     [SerializeField] private SpriteRenderer originalColor;
+    [SerializeField] private PointToEnd pointToEnd;
 
     public override void Config(ElementData element, ILogicOfLevel level)
     {
         base.Config(element, level);
-        end.Config(element, level);
-        end.onWin = ()=>{
-            onWin?.Invoke();
-        };
+        pointToEnd.Config(element, level);
         ResetAll();
     }
 
-    internal void ShowEndWay()
+    internal void ShowEndWay(bool isShoot)
     {
-        StartCoroutine(ShowEndWayCorrutine());
+        StartCoroutine(ShowEndWayCorrutine(isShoot));
     }
 
-    private IEnumerator ShowEndWayCorrutine(){
-        StartCoroutine(LerpAlphaCoroutine());
+    private IEnumerator ShowEndWayCorrutine(bool isShoot){
+        if (!isShoot)
+        {
+            StartCoroutine(LerpAlphaCoroutine());
+        }
         yield return new WaitForSeconds(1);
-        end.gameObject.SetActive(true);
+        pointToEnd.gameObject.SetActive(true);
     }
 
     private IEnumerator LerpAlphaCoroutine()
@@ -59,12 +57,12 @@ public class PointToStart : BaseElementInScene
 
     internal void ResetAll()
     {
-        end.gameObject.SetActive(false);
+        pointToEnd.gameObject.SetActive(false);
         originalColor.color = Color.white;
     }
 
     public PointToEnd GetEndPoint()
     {
-        return end;
+        return pointToEnd;
     }
 }

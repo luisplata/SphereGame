@@ -23,6 +23,8 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     [SerializeField]private int currentLayer;
     [SerializeField] private float timeToWaitBeforeStartTransparent;
     private List<BaseElementInScene> _listOfElementsWithLayer;
+    private Action _onWin;
+    public PointToEnd _endPoint;
 
     private void Start() {
         
@@ -79,15 +81,33 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
 
     private void LocatePlayer(Vector2 vector)
     {
-        playerInstantiate = Instantiate(player);
-        playerInstantiate?.Locate(vector);
-        playerInstantiate?.Config(this);
+        if (playerInstantiate == null)
+        {
+            playerInstantiate = Instantiate(player);
+            playerInstantiate?.Locate(vector);
+            playerInstantiate?.Config(this);
+            positionInLevel = playerInstantiate.transform;
+        }
     }
 
     private void ShootPlayer(Vector2 direction)
     {
-        playerInstantiate?.Shoot(direction);
-        lineRendererController?.ResetLine();
+        if (playerInstantiate != null)
+        {
+            playerInstantiate?.Shoot(direction);
+            lineRendererController?.ResetLine();
+            if (!playerInstantiate.IsShoot())
+            {
+                StartCoroutine(StartToShow());   
+            }
+        }
+    }
+    
+    private IEnumerator StartToShow()
+    {
+        Debug.Log("Start to show");
+        yield return new WaitForSeconds(1);
+        _endPoint.gameObject.SetActive(true);
     }
 
     public int GetCurrentLayer()
@@ -101,14 +121,24 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         foreach(var element in _listOfElementsWithLayer)
         {
             element.ChangeLayer(element.GetLayer() == currentLayer);
-            if(element is PointToStart pointToStart)
-            {
-                pointToStart.GetEndPoint().SetLayer(currentLayer);
-            }
         }
+        _endPoint.SetLayer(currentLayer);
     }
 
-    public List<BaseElementInScene> GetElements(string data)
+    public void SetCurrentEnd(PointToEnd pointToEnd)
+    {
+        _endPoint = pointToEnd;
+        _endPoint.OnWin = OnWin;
+    }
+
+    public void ResetGame()
+    {
+        _listOfElementsWithLayer = GetElements(mapToLoad);
+        ChangeLayer(0);
+        CreateLinesWithDataFromMap(_listOfElementsWithLayer);
+    }
+
+    private List<BaseElementInScene> GetElements(string data)
     {
         input.onRelease = ShootPlayer;
         input.onFirstPosition = LocatePlayer;
@@ -128,13 +158,16 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
             }else if(elementInstantiate.GetType() == typeof(PointToStart)){
                 var casting = (PointToStart) elementInstantiate;
                 positionInLevel = casting.transform;
-                input.onRelease += (dir)=>{
-                    casting.ShowEndWay();
+                input.onRelease += _=>{
+                    casting.ShowEndWay(playerInstantiate.IsShoot());
                 };
-                input.onFirstPosition += (dir)=>{
-                    casting.ResetAll();
+                input.onFirstPosition += _=>{
+                    if (!playerInstantiate.IsShoot())
+                    {
+                        casting.ResetAll();
+                    }
                 };
-                casting.onWin = OnWin;
+                ServiceLocator.Instance.GetService<ILogicOfLevel>().SetCurrentEnd(casting.GetEndPoint());
             }else if(elementInstantiate.GetType() == typeof(MotionSensor)){
                 var casting = (MotionSensor) elementInstantiate;
                 var redingg = new ReadingFile(element.Data.Replace('\'','\"'));
@@ -154,7 +187,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
                     var elementInstantiatee = Instantiate(factory.GetElementWithOutInstantate(elementt.Element));
                     if(elementInstantiatee.GetType() == typeof(TeleportLayerEnd)){
                         var castingg = (TeleportLayerEnd) elementInstantiatee;
-                        castingg.Config(elementt, this, elementt.LayerDestiny);
+                        castingg.Config(elementt, this, elementt.LayerDestiny, input);
                         casting.Config(element, this, castingg, elementt.LayerDestiny);
                         listOfElements.Add(elementInstantiatee);
                         break;
@@ -183,6 +216,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         Debug.Log("Win in Logic");
         input.onRelease = null;
         input.onFirstPosition = null;
+        _endPoint = null;
         GetElements(mapToLoad);
     }
 }

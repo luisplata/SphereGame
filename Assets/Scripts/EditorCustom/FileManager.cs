@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FileManager : MonoBehaviour, IFileManager
 {
-    [SerializeField] private TextMeshProUGUI result;
     public void Config(IRulesMediator allRules)
     { 
         
@@ -22,5 +21,10 @@ public class FileManager : MonoBehaviour, IFileManager
         result = "{\"elements\":[" + string.Join(",", listOfElements) + "]}";
         Debug.Log(result);
         return result;
+    }
+
+    public void SaveMap(string result)
+    {
+        PlayerPrefs.SetString("currentMap", result);
     }
 }

@@ -17,6 +17,10 @@ public class ServiceLocator
     public void RegisterService<T>(T service)
     {
         var type = typeof(T);
+        if (_services.ContainsKey(type))
+        {
+            _services.Remove(type);
+        }
         Assert.IsFalse(_services.ContainsKey(type), 
             $"Service {type} already registered");
         

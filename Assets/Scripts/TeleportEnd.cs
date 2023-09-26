@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class TeleportEnd : BaseElementInScene
 {
-    private PlayerCustom _player;
+    protected PlayerCustom _player;
     [SerializeField] private float duration;
     [SerializeField] protected GameObject pointToExpulse;
 
-    internal void Teleport(PlayerCustom player)
+    internal virtual void Teleport(PlayerCustom player)
     {
         _player = player;
         _player.transform.position = transform.position;

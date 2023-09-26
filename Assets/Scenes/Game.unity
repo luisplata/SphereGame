@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundSfxService: {fileID: 121402978}
+  logicOfLevelService: {fileID: 1045356303}
 --- !u!1 &130536395
 GameObject:
   m_ObjectHideFlags: 0

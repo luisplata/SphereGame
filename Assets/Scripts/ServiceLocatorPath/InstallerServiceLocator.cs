@@ -7,7 +7,10 @@ namespace ServiceLocatorPath
     {
         [SerializeField, InterfaceType(typeof(ISoundSfxService))]
         private Object soundSfxService;
+        [SerializeField, InterfaceType(typeof(ILogicOfLevel))]
+        private Object logicOfLevelService;
         private ISoundSfxService SoundSfxService => soundSfxService as ISoundSfxService;
+        private ILogicOfLevel Logic => logicOfLevelService as ILogicOfLevel;
         
         /* Template for install services
         [SerializeField, InterfaceType(typeof(ISoundSfxService))]
@@ -17,6 +20,7 @@ namespace ServiceLocatorPath
         private void Awake()
         {
             ServiceLocator.Instance.RegisterService(SoundSfxService);
+            ServiceLocator.Instance.RegisterService(Logic);
         }
     }
 }

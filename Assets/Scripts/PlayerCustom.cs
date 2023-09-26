@@ -8,7 +8,7 @@ public class PlayerCustom : MonoBehaviour
     [SerializeField][Range(1,10)] private float speed = 1;
     [SerializeField] private LineRenderer lineRenderer;
     private Vector2 velocity;
-    private bool cantMove;
+    private bool cantMove, _isShoot;
     private ILogicOfLevel _levelLogic;
     private Queue<float> timeToLive = new();
 
@@ -17,6 +17,7 @@ public class PlayerCustom : MonoBehaviour
         velocity = direction.normalized * speed;
         velocity = velocity *-1;
         cantMove = true;
+        _isShoot = true;
         lineRenderer.enabled = true;
         lineRenderer.positionCount = 0;
         timeToLive.Enqueue(5f);
@@ -33,6 +34,8 @@ public class PlayerCustom : MonoBehaviour
             var time = timeToLive.Dequeue();
             yield return new WaitForSeconds(time);   
         }
+
+        ServiceLocator.Instance.GetService<ILogicOfLevel>().ResetGame();
         Destroy(gameObject);
     }
 
@@ -79,5 +82,20 @@ public class PlayerCustom : MonoBehaviour
     public void Stop()
     {
         cantMove = false;
+    }
+
+    public void AddTime(float time)
+    {
+        timeToLive.Enqueue(time);
+    }
+
+    public bool CanMove()
+    {
+        return cantMove;
+    }
+    
+    public bool IsShoot()
+    {
+        return _isShoot;
     }
 }
