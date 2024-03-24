@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerCustom : MonoBehaviour
 {
     [SerializeField][Range(1,10)] private float speed = 1;
-    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Vector2 velocity;
     private bool cantMove, _isShoot;
     private ILogicOfLevel _levelLogic;
@@ -18,12 +18,10 @@ public class PlayerCustom : MonoBehaviour
         velocity = velocity *-1;
         cantMove = true;
         _isShoot = true;
-        lineRenderer.enabled = true;
-        lineRenderer.positionCount = 0;
+        AddPointInLine(transform.position);
+        AddPointInLine(transform.position);
         timeToLive.Enqueue(5f);
         StartCoroutine(DestroyAfterTime());
-        AddPointInLine(transform.position);
-        AddPointInLine(transform.position);
     }
 
     private IEnumerator DestroyAfterTime()
@@ -35,14 +33,17 @@ public class PlayerCustom : MonoBehaviour
             yield return new WaitForSeconds(time);   
         }
 
-        ServiceLocator.Instance.GetService<ILogicOfLevel>().ResetGame();
-        Destroy(gameObject);
+        if (!ServiceLocator.Instance.GetService<ILogicOfLevel>().PlayerWin())
+        {
+            ServiceLocator.Instance.GetService<ILogicOfLevel>().LoseGame();
+            Destroy(gameObject);
+        }
     }
 
     private void Update() {
         if(!cantMove) return;
         transform.Translate(velocity * Time.deltaTime);
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, transform.position);
+        ServiceLocator.Instance.GetService<ILineRendererController>().SetPositionToLastPoint(_levelLogic.GetCurrentLayer(), transform.position);
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
@@ -63,10 +64,9 @@ public class PlayerCustom : MonoBehaviour
         AddPointInLine(transform.position);
     }
 
-    protected void AddPointInLine(Vector3 position)
+    private void AddPointInLine(Vector3 position)
     {
-        lineRenderer.positionCount++;
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, position);
+        ServiceLocator.Instance.GetService<ILineRendererController>().AddPoint(_levelLogic.GetCurrentLayer(), position);
     }
 
     internal void Locate(Vector2 vector)
@@ -97,5 +97,11 @@ public class PlayerCustom : MonoBehaviour
     public bool IsShoot()
     {
         return _isShoot;
+    }
+
+    public void DestroyGameObject()
+    {
+        spriteRenderer.enabled = false;
+        Destroy(gameObject, 1);
     }
 }

@@ -157,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3817c2b7af1675841acf4ffa64feafda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  element: {fileID: 8831068383599252015}
   target: {fileID: 8831068382550130681}
   middle: {fileID: 8831068383945173678}
 --- !u!1 &8831068383599251985
@@ -210,8 +209,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8831068383715751522}
   spriteOn: {fileID: 21300000, guid: 6b69605426a61ed46abe6fa7c1dc6671, type: 3}
   spriteOff: {fileID: 21300000, guid: 334e10ca94ec8f7469ae3913d150fdef, type: 3}
+  layer: 0
   collision: {fileID: 8831068383319094760}
-  colliders: {fileID: 8831068383319094760}
+  isTrigger: 0
   duration: 0.5
 --- !u!1 &8831068383715751524
 GameObject:

@@ -7,7 +7,6 @@ using UnityEngine;
 public class LevelLogic : MonoBehaviour, ILogicOfLevel {
 
     public Transform PositionInLevel => positionInLevel;
-    [SerializeField] private GameObject panelGanaste;
     [SerializeField] private string mapToLoad;
     [SerializeField] private FactoryOfElements factory;
     [SerializeField] private PlayerCustom player;
@@ -15,6 +14,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float timeToWaitLineInScreen;
     [SerializeField] private LineRendererController lineRendererController;
+    [SerializeField] private UIController uiController;
     private PlayerCustom playerInstantiate;
     private Transform positionInLevel;
     private GameObject[] positionsToCheckPoints;
@@ -25,14 +25,17 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     private List<BaseElementInScene> _listOfElementsWithLayer;
     private Action _onWin;
     public PointToEnd _endPoint;
+    private bool _win;
 
     private void Start() {
         
         listOfElements = new List<BaseElementInScene>();
         _listOfElementsWithLayer = GetElements(mapToLoad);
         ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound("bg", true);
-        ChangeLayer(currentLayer);
         CreateLinesWithDataFromMap(_listOfElementsWithLayer);
+        uiController.Configure(this);
+        input.CanRead(true);
+        ChangeLayer(currentLayer);
     }
 
     private void CreateLinesWithDataFromMap(List<BaseElementInScene> list)
@@ -122,7 +125,14 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         {
             element.ChangeLayer(element.GetLayer() == currentLayer);
         }
-        _endPoint.SetLayer(currentLayer);
+        if (currentLayer == 0)
+        {
+            ServiceLocator.Instance.GetService<ILineRendererController>().ResetLines(currentLayer);
+        }
+        else
+        {
+            ServiceLocator.Instance.GetService<ILineRendererController>().CreateLine(currentLayer);
+        }
     }
 
     public void SetCurrentEnd(PointToEnd pointToEnd)
@@ -134,8 +144,23 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     public void ResetGame()
     {
         _listOfElementsWithLayer = GetElements(mapToLoad);
-        ChangeLayer(0);
         CreateLinesWithDataFromMap(_listOfElementsWithLayer);
+        _endPoint.SetLayer(currentLayer);
+        input.CanRead(true);
+        ChangeLayer(0);
+        _win = false;
+    }
+
+    public void LoseGame()
+    {
+        input.CanRead(false);
+        uiController.ShowPanelLose();
+        _win = false;
+    }
+
+    public bool PlayerWin()
+    {
+        return _win;
     }
 
     private List<BaseElementInScene> GetElements(string data)
@@ -217,6 +242,11 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         input.onRelease = null;
         input.onFirstPosition = null;
         _endPoint = null;
-        GetElements(mapToLoad);
+        playerInstantiate.Stop();
+        playerInstantiate.DestroyGameObject();
+        playerInstantiate = null;
+        uiController.ShowPanelWin();
+        input.CanRead(false);
+        _win = true;
     }
 }

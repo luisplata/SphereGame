@@ -9,6 +9,7 @@ public class InputFacade : MonoBehaviour, IInputFacade{
     private bool isCliking;
     private Vector2 direction;
     private Vector2 firstPosition, secondPosition;
+    private bool _canRead;
 
     public Vector2 FirstPosition => firstPosition;
 
@@ -16,6 +17,7 @@ public class InputFacade : MonoBehaviour, IInputFacade{
 
     public void Click(CallbackContext env)
     {
+        if(!_canRead) return;
         isCliking = env.performed;
         if (env.started)
         {
@@ -41,6 +43,7 @@ public class InputFacade : MonoBehaviour, IInputFacade{
     }
 
     public void Point(CallbackContext env){
+        if(!_canRead) return;
         point = env.ReadValue<Vector2>();
         if(isCliking){
             secondPosition = CalculatePositionInWord();
@@ -50,5 +53,10 @@ public class InputFacade : MonoBehaviour, IInputFacade{
     private Vector2 GetDirection(Vector2 fromPosition, Vector2 toPosition)
     {
         return (toPosition - fromPosition).normalized;
+    }
+
+    public void CanRead(bool canread)
+    {
+        _canRead = canread;
     }
 }

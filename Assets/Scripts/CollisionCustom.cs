@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionCustom : MonoBehaviour
 {
     public Action<GameObject> onCollisionValid;
-    private BaseElementInScene element;
+    protected BaseElementInScene element;
     private bool _isTrigger;
 
     public void Config(BaseElementInScene element, bool isTrigger)
