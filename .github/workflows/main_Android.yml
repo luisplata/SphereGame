@@ -1,6 +1,6 @@
 name: Actions Android 😎
 on:
-workflow_dispatch: {}
+  workflow_dispatch: {}
   pull_request:
     branches:
       - main
