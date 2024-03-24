@@ -166,10 +166,10 @@ MonoBehaviour:
   layer: 0
   collision: {fileID: 2729849141258907032}
   isTrigger: 1
+  doing: {fileID: 5151923211949897102}
   colliders:
   - {fileID: 4969266982097619498}
   - {fileID: 2440902188588093968}
-  doing: {fileID: 5151923211949897102}
 --- !u!114 &5151923211949897102
 MonoBehaviour:
   m_ObjectHideFlags: 0
