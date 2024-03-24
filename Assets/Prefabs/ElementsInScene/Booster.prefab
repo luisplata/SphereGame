@@ -212,8 +212,6 @@ MonoBehaviour:
   layer: 0
   collision: {fileID: 8831068383319094760}
   isTrigger: 0
-  colliders: []
-  colliders: {fileID: 0}
   duration: 0.5
 --- !u!1 &8831068383715751524
 GameObject:
