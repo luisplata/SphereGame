@@ -4,4 +4,5 @@ public interface ILogicOfLevel
     void ChangeLayer(int layerDestiny);
     void SetCurrentEnd(PointToEnd pointToEnd);
     void ResetGame();
+    void LoseGame();
 }
