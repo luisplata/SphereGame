@@ -1,0 +1,156 @@
+﻿{
+  "elements": [
+    {
+      "Element": "PointToStart",
+      "PositionX": 0,
+      "PositionY": 1.5,
+      "Layer": 2,
+      "Rotation": 180,
+      "Data": ""
+    },
+    {
+      "Element": "MotionSensor",
+      "PositionX": 0,
+      "PositionY": 0,
+      "Layer": 0,
+      "Rotation": 0,
+      "Data": "{'elements':[{'Element':'Wall','LayerDestiny':2,'PositionX':0,'PositionY':2,'Layer':0,'Rotation':0, 'Data':''},{'Element':'WallSmall','LayerDestiny':2,'PositionX':-1,'PositionY':0.5,'Layer':0,'Rotation':90, 'Data':''},{'Element':'WallSmall','LayerDestiny':2,'PositionX':1,'PositionY':0.5,'Layer':0,'Rotation':90, 'Data':''},{'Element':'WallSmall','LayerDestiny':2,'PositionX':-1,'PositionY':1.5,'Layer':0,'Rotation':90, 'Data':''},{'Element':'WallSmall','LayerDestiny':2,'PositionX':1,'PositionY':1.5,'Layer':0,'Rotation':90, 'Data':''},{'Element':'WallSmall','LayerDestiny':2,'PositionX':-1,'PositionY':-0.5,'Layer':0,'Rotation':90, 'Data':''},{'Element':'WallSmall','LayerDestiny':2,'PositionX':1,'PositionY':-0.5,'Layer':0,'Rotation':90, 'Data':''},{'Element':'Wall','LayerDestiny':2,'PositionX':0,'PositionY':-1,'Layer':0,'Rotation':0, 'Data':''}]}"
+    },
+    {
+      "Element": "Bounce",
+      "PositionX": 0,
+      "PositionY": -2,
+      "Layer": 0,
+      "Rotation": 180,
+      "Data": ""
+    },
+    {
+      "Element": "TeleportLayerBeging",
+      "PositionX": -2,
+      "PositionY": -2,
+      "Layer": 0,
+      "Rotation": 180,
+      "Data": "{'elements':[{'Element':'TeleportLayerEnd','LayerDestiny':1,'PositionX':-2,'PositionY':4,'Layer':1,'Rotation':270, 'Data':''}]}"
+    },
+    {
+      "Element": "MotionSensor",
+      "PositionX": 0,
+      "PositionY": 4,
+      "Layer": 1,
+      "Rotation": 90,
+      "Data": "{'elements':[{'Element':'WallSmall','LayerDestiny':2,'PositionX':2,'PositionY':3.5,'Layer':1,'Rotation':0, 'Data':''}]}"
+    },
+    {
+      "Element": "Bounce",
+      "PositionX": 2,
+      "PositionY": 4,
+      "Layer": 1,
+      "Rotation": 270,
+      "Data": ""
+    },
+    {
+      "Element": "Bounce",
+      "PositionX": 2,
+      "PositionY": 3,
+      "Layer": 1,
+      "Rotation": 180,
+      "Data": ""
+    },
+    {
+      "Element": "Bounce",
+      "PositionX": -2,
+      "PositionY": 3,
+      "Layer": 1,
+      "Rotation": 0,
+      "Data": ""
+    },
+    {
+      "Element": "WallSmall",
+      "PositionX": -2.35,
+      "PositionY": -2,
+      "Layer": 1,
+      "Rotation": 45,
+      "Data": ""
+    },
+    {
+      "Element": "WallSmall",
+      "PositionX": -1.65,
+      "PositionY": -2,
+      "Layer": 1,
+      "Rotation": 135,
+      "Data": ""
+    },
+    {
+      "Element": "WallSmall",
+      "PositionX": -1.65,
+      "PositionY": -2.7,
+      "Layer": 1,
+      "Rotation": 225,
+      "Data": ""
+    },
+    {
+      "Element": "WallSmall",
+      "PositionX": -2.35,
+      "PositionY": -2.7,
+      "Layer": 1,
+      "Rotation": 135,
+      "Data": ""
+    },
+    {
+      "Element": "WallSmall",
+      "PositionX": -2,
+      "PositionY": -3.5,
+      "Layer": 1,
+      "Rotation": 0,
+      "Data": ""
+    },
+    {
+      "Element": "Wall",
+      "PositionX": -2,
+      "PositionY": -4,
+      "Layer": 1,
+      "Rotation": 0,
+      "Data": ""
+    },
+    {
+      "Element": "TeleportLayerBeging",
+      "PositionX": -2,
+      "PositionY": 0,
+      "Layer": 1,
+      "Rotation": 0,
+      "Data": "{'elements':[{'Element':'TeleportLayerEnd','LayerDestiny':2,'PositionX':0,'PositionY':-4,'Layer':2,'Rotation':-60, 'Data':''}]}"
+    },
+    {
+      "Element": "WallSmall",
+      "PositionX": 0,
+      "PositionY": -3,
+      "Layer": 2,
+      "Rotation": 0,
+      "Data": ""
+    },
+    {
+      "Element": "Booster",
+      "PositionX": 2.5,
+      "PositionY": -2.1,
+      "Layer": 2,
+      "Rotation": -90,
+      "Data": ""
+    },
+    {
+      "Element": "Bounce",
+      "PositionX": 2.5,
+      "PositionY": 3,
+      "Layer": 2,
+      "Rotation": 270,
+      "Data": ""
+    },
+    {
+      "Element": "Bounce",
+      "PositionX": 1.8,
+      "PositionY": 3,
+      "Layer": 2,
+      "Rotation": -30,
+      "Data": ""
+    }
+  ]
+}

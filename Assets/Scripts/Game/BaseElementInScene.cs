@@ -10,13 +10,26 @@ public abstract class BaseElementInScene : MonoBehaviour
     protected ILogicOfLevel _level;
     private ElementData _element;
 
-    public virtual void Config(ElementData element,ILogicOfLevel level)
+    public virtual void Config(ElementData element,ILogicOfLevel level, bool moveTransform = true)
     {
-        transform.rotation = Quaternion.Euler(0, 0, element.Rotation);
-        transform.position = new Vector2(element.PositionX, element.PositionY);
+        if (moveTransform)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, element.Rotation);
+            transform.position = new Vector2(element.PositionX, element.PositionY);   
+        }
         layer = element.Layer;
         _level = level;
         _element = element;
+    }
+
+    public void SetElement(ElementData element)
+    {
+        _element = element;
+    }
+
+    public void SetLevel(ILogicOfLevel level)
+    {
+        _level = level;
     }
 
     public Vector3 GetPosition()
@@ -51,6 +64,12 @@ public abstract class BaseElementInScene : MonoBehaviour
     public string GetElement()
     {
         return _element.Element;
+    }
+
+
+    public void SetLayer(int layer)
+    {
+        this.layer = layer;
     }
 
 }

@@ -5,4 +5,5 @@ public interface ILogicOfLevel
     void SetCurrentEnd(PointToEnd pointToEnd);
     void ResetGame();
     void LoseGame();
+    void CanRead(bool canread);
 }

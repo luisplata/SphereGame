@@ -89,6 +89,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
             playerInstantiate?.Locate(vector);
             playerInstantiate?.Config(this);
             positionInLevel = playerInstantiate.transform;
+            input.CanRead(true);
         }
     }
 
@@ -98,6 +99,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         {
             playerInstantiate?.Shoot(direction);
             lineRendererController?.ResetLine();
+            input.CanRead(false);
             if (!playerInstantiate.IsShoot())
             {
                 StartCoroutine(StartToShow());   
@@ -145,7 +147,7 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         ChangeLayer(0);
         _listOfElementsWithLayer = GetElements(mapToLoad);
         CreateLinesWithDataFromMap(_listOfElementsWithLayer);
-        _endPoint.SetLayer(currentLayer);
+        //_endPoint.SetLayer(currentLayer);
         input.CanRead(true);
     }
 
@@ -153,6 +155,11 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     {
         input.CanRead(false);
         uiController.ShowPanelLose();
+    }
+
+    public void CanRead(bool canread)
+    {
+        input.CanRead(canread);
     }
 
     private List<BaseElementInScene> GetElements(string data)

@@ -1,15 +1,14 @@
 using System;
 using System.Collections;
-using ServiceLocatorPath;
 using UnityEngine;
 
 public class Booster : BaseElementInSceneWithCollider {
-    [SerializeField] private BoosterCollider colliders;
+    [SerializeField] private BoosterCollider colliderBooster;
     [SerializeField] private float duration;
     private bool canUse = true;
     
     protected override void OnCollisionEnterBase(GameObject other){
-        StartCoroutine(MoveWithCurveCoroutine(other.GetComponent<PlayerCustom>(), colliders.GetMiddle(), colliders.GetTarget(),duration));
+        StartCoroutine(MoveWithCurveCoroutine(other.GetComponent<PlayerCustom>(), colliderBooster.GetMiddle(), colliderBooster.GetTarget(),duration));
     }
     
     private IEnumerator MoveWithCurveCoroutine(PlayerCustom startPosition, GameObject middlePosition, GameObject targetPosition, float duration)
