@@ -6,4 +6,5 @@ public interface ILogicOfLevel
     void ResetGame();
     void LoseGame();
     void CanRead(bool canread);
+    bool PlayerWin();
 }

@@ -33,8 +33,11 @@ public class PlayerCustom : MonoBehaviour
             yield return new WaitForSeconds(time);   
         }
 
-        ServiceLocator.Instance.GetService<ILogicOfLevel>().LoseGame();
-        Destroy(gameObject);
+        if (!ServiceLocator.Instance.GetService<ILogicOfLevel>().PlayerWin())
+        {
+            ServiceLocator.Instance.GetService<ILogicOfLevel>().LoseGame();
+            Destroy(gameObject);
+        }
     }
 
     private void Update() {

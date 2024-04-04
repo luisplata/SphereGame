@@ -11,10 +11,6 @@ public abstract class BaseElementInSceneWithCollider : BaseElementInScene{
         collision.Config(this, isTrigger);
         collision.onCollisionValid = OnCollisionEnterBase;
         spriteRenderer.sprite = spriteOn;
-        foreach (var collider in colliders)
-        {
-            collider.enabled = isTrigger;
-        }
     }
 
     protected virtual void OnCollisionEnterBase(GameObject other)

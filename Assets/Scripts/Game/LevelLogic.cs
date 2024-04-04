@@ -25,16 +25,17 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
     private List<BaseElementInScene> _listOfElementsWithLayer;
     private Action _onWin;
     public PointToEnd _endPoint;
+    private bool _win;
 
     private void Start() {
         
         listOfElements = new List<BaseElementInScene>();
         _listOfElementsWithLayer = GetElements(mapToLoad);
         ServiceLocator.Instance.GetService<ISoundSfxService>().PlaySound("bg", true);
-        ChangeLayer(currentLayer);
         CreateLinesWithDataFromMap(_listOfElementsWithLayer);
         uiController.Configure(this);
         input.CanRead(true);
+        ChangeLayer(currentLayer);
     }
 
     private void CreateLinesWithDataFromMap(List<BaseElementInScene> list)
@@ -144,17 +145,24 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
 
     public void ResetGame()
     {
-        ChangeLayer(0);
         _listOfElementsWithLayer = GetElements(mapToLoad);
         CreateLinesWithDataFromMap(_listOfElementsWithLayer);
         //_endPoint.SetLayer(currentLayer);
         input.CanRead(true);
+        ChangeLayer(0);
+        _win = false;
     }
 
     public void LoseGame()
     {
         input.CanRead(false);
         uiController.ShowPanelLose();
+        _win = false;
+    }
+
+    public bool PlayerWin()
+    {
+        return _win;
     }
 
     public void CanRead(bool canread)
@@ -246,5 +254,6 @@ public class LevelLogic : MonoBehaviour, ILogicOfLevel {
         playerInstantiate = null;
         uiController.ShowPanelWin();
         input.CanRead(false);
+        _win = true;
     }
 }
