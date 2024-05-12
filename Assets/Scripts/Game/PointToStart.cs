@@ -6,9 +6,9 @@ public class PointToStart : BaseElementInScene
     [SerializeField] private SpriteRenderer originalColor;
     [SerializeField] private PointToEnd pointToEnd;
 
-    public override void Config(ElementData element, ILogicOfLevel level)
+    public override void Config(ElementData element, ILogicOfLevel level, bool moveTransform = true)
     {
-        base.Config(element, level);
+        base.Config(element, level, moveTransform);
         pointToEnd.Config(element, level);
         ResetAll();
     }

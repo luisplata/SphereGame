@@ -48,7 +48,13 @@ public class PlayerCustom : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        var isAsWall = false;
         if(collision.gameObject.TryGetComponent<CollisionCustom>(out var baseElement)){
+            
+            if (collision.gameObject.TryGetComponent<Wall>(out _))
+            {
+                isAsWall = true;
+            }
             if(baseElement.GetElement().GetLayer() != _levelLogic.GetCurrentLayer()){
                 return;
             }
@@ -58,8 +64,12 @@ public class PlayerCustom : MonoBehaviour
         Vector2 normal = collision.contacts[0].normal.normalized;
         // Calculate the new velocity after the collision
         velocity = Vector2.Reflect(velocity, normal);
-        //Add more life to the player
-        timeToLive.Enqueue(2f);
+        //Add more life to the player if isn't wall
+        if (!isAsWall)
+        {
+            Debug.Log($"Add 2 sec");
+            timeToLive.Enqueue(2f);   
+        }
         
         AddPointInLine(transform.position);
     }
@@ -103,5 +113,10 @@ public class PlayerCustom : MonoBehaviour
     {
         spriteRenderer.enabled = false;
         Destroy(gameObject, 1);
+    }
+
+    public void RestarLife()
+    {
+        
     }
 }

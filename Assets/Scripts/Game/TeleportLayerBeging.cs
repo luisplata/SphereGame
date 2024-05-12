@@ -13,5 +13,6 @@ public class TeleportLayerBeging : TeleportBeging
     {
         base.DoSomethingAfterTeleport();
         _level.ChangeLayer(_layerDestiny);
+        _level.CanRead(true);
     }
 }
